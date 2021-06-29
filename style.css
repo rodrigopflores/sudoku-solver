@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(90deg, #515070 0%, #6b69b0 100%);
+  min-height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  margin-top: 50px;
+}
+.numbers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 132px;
+}
+.number,
+.solver,
+.clear,
+.delete {
+  background: lightslategray;
+  border-radius: 50%;
+  margin: 2px;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  cursor: pointer;
+}
+.selected {
+  background: white;
+  color: lightslategray;
+}
+.opt {
+  display: flex;
+  margin-top: 10px;
+}
+.ctrl-buttons {
+  display: flex;
+  flex-direction: column;
+}
+.solver,
+.clear,
+.delete {
+  width: 100px;
+  border-radius: 20px;
+}
+.grid {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 315px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.square {
+  width: 35px;
+  height: 35px;
+  background: #f9f9f9;
+  font-family: sans-serif;
+  font-size: 18px;
+  color: #515070;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 35px;
+  overflow: hidden;
+  border: 1px solid rgb(236, 236, 236);
+}
+.message {
+  font-family: sans-serif;
+  color: white;
+  height: 20px;
+}
+.title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #f9f9f9;
+}
+.row2,
+.row5 {
+  border-bottom: 1px solid rgb(116, 115, 115);
+}
+.column2,
+.column5 {
+  border-right: 1px solid rgb(116, 115, 115);
+}
