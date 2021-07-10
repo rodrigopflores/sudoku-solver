@@ -25,7 +25,7 @@ const addNumberToSquare = function () {
   message.textContent = "";
   const row = Number(this.classList[1].charAt(3));
   const column = Number(this.classList[2].charAt(6));
-  let cell = getCell(row, column);
+  const cell = getCell(row, column);
   let isNumber = false;
   if (selectedNumber > 0 && selectedNumber < 10) isNumber = true;
   if (
@@ -40,14 +40,9 @@ const addNumberToSquare = function () {
     rowsContain[row][selectedNumber - 1] = true;
     columnsContain[column][selectedNumber - 1] = true;
     cellsContain[cell][selectedNumber - 1] = true;
-    console.log(board);
-    console.log(rowsContain);
-    console.log(columnsContain);
-    console.log(cellsContain);
     this.textContent = selectedNumber;
   } else {
     const content = this.textContent - 1;
-    console.log(content);
     board[row][column] = null;
     rowsContain[row][content] = false;
     columnsContain[column][content] = false;
@@ -61,34 +56,35 @@ squares.forEach((square) =>
 );
 
 const solver = document.querySelector(".solver");
+
 solver.addEventListener("click", function () {
-  let timeLimit = Date.now();
-  let didIt = solve(0, 0, timeLimit);
+  const timeLimit = Date.now();
+  const didIt = solve(0, 0, timeLimit);
   if (!didIt) message.textContent = "Unable to solve";
   fillSquares();
 });
 
 const clear = document.querySelector(".clear");
-clear.addEventListener("click", function () {
+clear.addEventListener("click", () => {
   clearBoard();
   fillSquares();
 });
 
 // Solving
 
-let getNextRow = function (row, col) {
+function getNextRow(row, col) {
   return row + Math.trunc((col + 1) / 9);
-};
+}
 
-let getNextCol = function (col) {
+function getNextCol(col) {
   return (col + 1) % 9;
-};
+}
 
-let getCell = function (row, col) {
+function getCell(row, col) {
   return Math.trunc(row / 3) * 3 + Math.trunc(col / 3);
-};
+}
 
-const nextEmptyPosition = function (row, col) {
+function nextEmptyPosition(row, col) {
   while (row != 9) {
     if (board[row][col] == null) {
       return [row, col];
@@ -97,19 +93,17 @@ const nextEmptyPosition = function (row, col) {
     col = getNextCol(col);
   }
   return [9, 0];
-};
+}
 
-let solve = function (rowStart, colStart, timeLimit) {
-  if (Date.now() - timeLimit > 1000) {
-    return false;
-  }
-  let position = nextEmptyPosition(rowStart, colStart);
-  let row = position[0];
-  let col = position[1];
+function solve(rowStart, colStart, timeLimit) {
+  if (Date.now() - timeLimit > 1000) return false;
+  const position = nextEmptyPosition(rowStart, colStart);
+  const row = position[0];
+  const col = position[1];
   if (row == 9) {
     return true;
   }
-  let cell = getCell(row, col);
+  const cell = getCell(row, col);
   let contains = new Array(9).fill(false);
   for (let i = 0; i < 9; ++i) {
     if (
@@ -140,18 +134,18 @@ let solve = function (rowStart, colStart, timeLimit) {
   }
   board[row][col] = null;
   return false;
-};
+}
 
-const containsAll = function (containsArray) {
+function containsAll(containsArray) {
   for (let value of containsArray) {
     if (!value) return false;
   }
   return true;
-};
+}
 
 // Filling squares
 
-const fillSquares = function () {
+function fillSquares() {
   for (let i = 0; i < 9; ++i) {
     for (let j = 0; j < 9; ++j) {
       let square = document.querySelector(`.row${i}.column${j}`);
@@ -162,10 +156,10 @@ const fillSquares = function () {
       }
     }
   }
-};
+}
 
 // Clearing board
-const clearBoard = function () {
+function clearBoard() {
   for (let i = 0; i < 9; ++i) {
     for (let j = 0; j < 9; ++j) {
       board[i][j] = null;
@@ -174,4 +168,4 @@ const clearBoard = function () {
       cellsContain[i][j] = false;
     }
   }
-};
+}
